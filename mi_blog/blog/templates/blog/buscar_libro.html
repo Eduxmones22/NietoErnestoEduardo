@@ -1,0 +1,18 @@
+{% extends 'libreria/index.html' %}
+
+<h2>Buscar Libros</h2>
+<form method="GET">
+    <input type="text" name="q" placeholder="Ingrese el nombre del libro" value="{{ query }}">
+    <button type="submit">Buscar</button>
+</form>
+
+{% if libros %}
+    <h3>Resultados:</h3>
+    <ul>
+        {% for libro in libros %}
+        <li>{{ libro.nombre }} - {{ libro.autor }}</li>
+        {% endfor %}
+    </ul>
+{% elif query %}
+    <p>No se encontraron libros con "{{ query }}".</p>
+{% endif %}

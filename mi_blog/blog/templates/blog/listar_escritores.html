@@ -1,0 +1,28 @@
+{% extends 'libreria/index.html' %}
+
+{% block titulo %}
+<h1>Listado de Escritories</h1>
+{% endblock titulo %}
+
+{% block contenido %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Nacionalidad</th>
+            <th>Fecha Nacimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for p in escritores  %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.nacionalidad }}</td>
+            <td>{{ p.fecha_nacimiento }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}

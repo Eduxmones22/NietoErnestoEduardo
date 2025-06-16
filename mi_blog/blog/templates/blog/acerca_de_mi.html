@@ -1,0 +1,48 @@
+{% extends 'blog/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+
+{% endblock titulo %}
+
+{% block contenido %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <img src="{% static 'img/mi_foto.jpg'%}" alt="Mi foto" width="350" height="200">
+        <h1>¡Hola, soy Eduardo Nieto!</h1>
+        <p>Tengo 38 años y soy un apasionado de los <strong>videojuegos</strong> y las <strong>películas</strong>.  
+        trabaje 14 años como desarrollador, comenzando con Clipper y Visual Basic 6,  
+        hasta que descubrí <strong>Python</strong>, lo que me motivó a seguir aprendiendo.  
+        Actualmente trabajo en el área de aplicaciones de una empresa agropecuaria desde hace 3 años.</p>
+       <p>Descubri la programacion por el 2000 por curiosidad, gracias a un amigo que se compró una
+        computadora cuando nadie en el pueblo tenia, y junto con ella tenia una copia de VB6 y su manual.
+        En conjunto empezamos a desarrollor un videojuegos al estilo Duck Hunt (el juego de cazar patos de
+        de family) y ahi es cuando dije quiero hacer esto. Lamentablemente nunca llegue a estudiar la
+        carrera de desarrollor de videojuegos ya que no estaba a mi alcance hacer el gasto, pero hoy 
+        soy un Analista de Sistemas que me dio algo dentro del mundo del desarrollo.
+        </p>
+ 
+        <p>Además, el <strong>handball</strong> es otra de mis grandes pasiones: soy profesor y jugador.  
+        En mis tiempos libres, me gusta explorar nuevas actividades, pero sin duda, lo que realmente me apasiona  
+        son los videojuegos y las películas.</p>
+
+        <p>Con respecto al curso puedo decir que estoy realmente satisfecho, al principio creo que dude ya quiero
+        sentia que no se estaba dictando el curso como esperarba y surgieron varios cambios de profesores, pero
+        debo decir que Norman cambio esa vision y realmente nos tocó alguien que realmente tubo ganas de enseñar,
+         fueron muy comodas y nutritivas las clases, se avanzó muy rapido, y aunque en principio crei que habia
+         errado en elegir el curso, ya que yo quiera mas apuntado al desarrollo de aplicaciones, la verdad que
+         con todo lo aprendido me termino gustando muchisimo lo que hicimos.
+        </p>
+    
+
+        <p>Un parrafo aparte tambien para nuestro tutor Valentin, que siempre estuvo atento a nuestras consultas
+            y a resolver cualquier imprevisto que surgió. 
+            Definitivamente espero volver a tomar otro curso, y realmente espero que nos toque nuevamente un profesor
+            y un tutor como los de este curso.
+        </p>        
+    </div>
+</form>
+{% endblock contenido %}

@@ -1,0 +1,16 @@
+{% extends 'blog/index.html' %}
+
+{% block titulo %}
+<h2 class="section-title.style-white title" style="text-align: center;">Complete el Registro</h2>                                
+{% endblock titulo %}
+
+{% block contenido %}
+
+<form method="post">
+    <table>
+        {% csrf_token %}
+        {{ form.as_table }}
+    </table>
+    <button type="submit">Guardar</button>   
+</form>
+{% endblock contenido %}

@@ -1,0 +1,16 @@
+{% extends 'blog/index.html' %}
+
+{% block titulo %}
+<h1>Blog</h1>
+{% endblock titulo %}
+
+{% block contenido %}
+<h2>Crear una nueva noticia</h2>
+<form method="post">
+    <table>
+        {% csrf_token %}
+        {{ form.as_table }}
+    </table>
+    <button type="submit">Guardar</button>   
+</form>
+{% endblock contenido %}
