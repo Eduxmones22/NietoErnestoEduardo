@@ -44,4 +44,22 @@ def logueo(request):
 
     return render(request, "cuentas/login.html", {"form": FormLogueo})
 
+    
+@login_required
+def editarPerfil(request):
+    usuario = request.user
+    if request.method == "POST":
+        FormPerfil = Editar_Perfil(request.POST)
+        if FormPerfil.is_valid():
+            user = User.objects.get(username=usuario)
+            user.email = FormPerfil.cleaned_data.get("email")
+            user.first_name = FormPerfil.cleaned_data.get("first_name")
+            user.last_name = FormPerfil.cleaned_data.get("last_name")
+            user.save()
+            return redirect(reverse_lazy("index"))
+    else:
+        FormPerfil = Editar_Perfil(instance=usuario)
+    return render(request, "cuentas/editarPerfil.html", {"form": FormPerfil})
+    
+
 

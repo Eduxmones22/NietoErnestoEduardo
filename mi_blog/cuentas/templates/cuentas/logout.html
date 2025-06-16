@@ -1,12 +1,12 @@
 {% extends "blog/index.html" %}
 
 {% block titulo %}
-<h2 class="section-title.style-white title" style="text-align: center;">Logout</h2>                                
+<!-- <h2 class="section-title.style-white title" style="text-align: center;">Logout</h2>                                 -->
 {% endblock titulo %}
 
 {% block contenido %}   
-<form method="post" action="">
+<form method="post" action="" style="text-align: center;">
     {% csrf_token %}
-    <button type="submit">Se ha deslogueado correctamente</button>
+    <p style=" text-align: center;">Se ha deslogueado correctamente</p>
 </form>
 {% endblock contenido %}

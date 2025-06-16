@@ -3,10 +3,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from blog.models import Noticia, Consola
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 def index(request):
     return render(request, 'blog/index.html')
+
 
 class CrearNoticia(LoginRequiredMixin, CreateView):
     model = Noticia

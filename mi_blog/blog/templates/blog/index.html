@@ -124,7 +124,7 @@
             <div class="collapse navbar-collapse">
                 {% if user.is_authenticated %}
                     <li class="btn btn_primary"><a href="#">Nueva noticia</a></li>
-                    <li class="current-menu-item"><a href="#">Perfil</a></li>
+                    <a class="btn btn-warning" href="{% url 'perfil' %}">Perfil</a>
                     <a class="btn btn-warning" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" method="post" action="{% url 'desloguearse' %}" style="display: none;">
                         {% csrf_token %}
