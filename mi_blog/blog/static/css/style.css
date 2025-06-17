@@ -200,11 +200,11 @@ textarea:focus,
 input[type=button]:focus,
 input[type=reset]:focus,
 input[type=submit]:focus,
-select:focus {
+/* select:focus {
   outline: none;
   box-shadow: none;
   border: 1px solid #ddd;
-}
+} */
 
 .no-gutter.row,
 .no-gutter.container,
@@ -534,7 +534,7 @@ ul {
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 1px;
-  border: none;
+  /* border: none; */
   cursor: pointer;
   transition: 0.3s ease-in;
 }
@@ -2816,7 +2816,7 @@ ul {
   height: 48px;
   width: 100%;
   border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(2, 2, 2, 0.5) !important;
   padding: 0 18px;
 }
 

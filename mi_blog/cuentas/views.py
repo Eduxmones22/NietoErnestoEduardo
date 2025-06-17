@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from cuentas.forms import *
+from cuentas.models import Avatar
 from django.urls import reverse_lazy, reverse
 
 from django.contrib.auth.forms import UserChangeForm
@@ -29,12 +30,12 @@ def logueo(request):
         if user is not None:
             login(request, user)
             #_______ Buscar Avatar
-            # try:
-            #     avatar = Avatar.objects.get(user=request.user.id).imagen.url
-            # except:
-            #     avatar = "/media/avatares/default.png"
-            # finally:
-            #     request.session["avatar"] = avatar
+            try:
+               avatar = Avatar.objects.get(user=request.user.id).imagen.url
+            except:
+                avatar = "/media/avatares/default.png"
+            finally:
+                request.session["avatar"] = avatar
             #______________________________________________________________            
             return render(request, "blog/index.html")
         else:
@@ -44,6 +45,7 @@ def logueo(request):
 
     return render(request, "cuentas/login.html", {"form": FormLogueo})
 
+#----------------------------- EDITAR PERFIL ---------------------------
     
 @login_required
 def editarPerfil(request):
@@ -60,6 +62,33 @@ def editarPerfil(request):
     else:
         FormPerfil = Editar_Perfil(instance=usuario)
     return render(request, "cuentas/editarPerfil.html", {"form": FormPerfil})
+
+#----------------------------- AGREGAR AVATAR ---------------------------
+
+@login_required
+def agregarAvatar(request):
+    if request.method == "POST":
+        FormAvatar = AvatarForm(request.POST, request.FILES)
+        if FormAvatar.is_valid():
+            usuario = User.objects.get(username=request.user)
+            imagen = FormAvatar.cleaned_data["imagen"]
+            #_________ Borrar avatares viejos
+            avatarViejo = Avatar.objects.filter(user=usuario)
+            if len(avatarViejo) > 0:
+                for i in range(len(avatarViejo)):
+                    avatarViejo[i].delete()
+            #__________________________________________
+            avatar = Avatar(user=usuario, imagen=imagen)
+            avatar.save()
+
+            #_________ Enviar la imagen al home
+            imagen = Avatar.objects.get(user=usuario).imagen.url
+            request.session["avatar"] = imagen
+            #____________________________________________________
+            return redirect(reverse_lazy("index"))
+    else:
+        FormAvatar = AvatarForm()
+    return render(request, "cuentas/agregarAvatar.html", {"form": FormAvatar}) 
     
 
 

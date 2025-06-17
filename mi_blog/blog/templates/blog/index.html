@@ -67,7 +67,7 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-5 align-self-center">
                         <div class="logo text-md-left text-center">
-                            <a class="main-logo" href="index.html"><img src="{% static 'img/logo.png'%}" alt="img"></a>
+                            <a class="main-logo" href="{% url 'index' %}"><img src="{% static 'img/logo.png'%}" alt="img"></a>
                         </div>
                     </div>
                 </div>
@@ -77,12 +77,13 @@
 
         <!-- navbar start -->
         <nav class="navbar navbar-expand-lg">
-            <div class="container nav-container">
-                <div class="nnav-right-part nav-right-part">
-                    <div class="menu-search-inner">
+                    <div class="navbar navbar-expand-lg">
                         <input type="text" placeholder="Buscar">
                         <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
-                    </div>                   
+                    </div>              
+            <div class="container nav-container">
+                <div class="nnav-right-part nav-right-part">
+                 
                 </div>                              
                 <div class="collapse navbar-collapse" id="nextpage_main_menu">
                     <ul class="navbar-nav menu-open">
@@ -93,23 +94,23 @@
                             <a href="{% url 'index' %}">Inicio</a>
                         </li>                        
                         <li>
-                            <a href="#playstation">PlayStation</a>
+                            <a href="{% url 'noticias_por_consola' 'playstation' %}">PlayStation</a>
                         </li>
                         <li>
-                            <a href="#xbox">Xbox</a>
+                            <a href="{% url 'noticias_por_consola' 'xbox' %}">Xbox</a>
                         </li>
                         <li>
-                            <a href="#nintendo">Nintendo</a>
+                            <a href="{% url 'noticias_por_consola' 'nintendo' %}">Nintendo</a>
                         </li>
                         <li>
-                            <a href="#PC">PC</a>
+                            <a href="{% url 'noticias_por_consola' 'pc' %}">PC</a>
                         </li>
                         <li>
-                            <a href="#Android">Android</a>
+                            <a href="{% url 'noticias_por_consola' 'android' %}">Android</a>
                         </li>
 
                         {% if user.is_authenticated %}
-                            <li><a href="#">Nueva noticia</a></li>
+                            <li><a href="{% url 'crear_noticias' %}">Nueva noticia</a></li>
                         {% endif %}  
 
                         <!-- <li class="current-menu-item">
@@ -123,13 +124,19 @@
             </div>
             <div class="collapse navbar-collapse">
                 {% if user.is_authenticated %}
-                    <li class="btn btn_primary"><a href="#">Nueva noticia</a></li>
-                    <a class="btn btn-warning" href="{% url 'perfil' %}">Perfil</a>
+                        {% csrf_token %}
+                        <div class="navbar-nav menu-open">
+                            <a href="{% url 'avatar' %}"><img src="{{ request.session.avatar }}" height="40px" weight="40px" alt=""></a>
+                            <p style="padding-top: 10px; padding-right: 15px; padding-left: 10px; text-transform: uppercase;font-weight: bold;text-align: right; font-size: medium; color:rgb(255, 255, 255)"> {{user.first_name}} {{user.last_name}}</p>
+                        </div>
+                                   
+                    <a class="btn btn-warning" href="{% url 'perfil' %}">Perfil</a></li>
                     <a class="btn btn-warning" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" method="post" action="{% url 'desloguearse' %}" style="display: none;">
-                        {% csrf_token %}
+                        
                     </form>                    
                 {% else %}
+
                     <a class="btn btn-warning" href="{% url 'loguearse' %}">Iniciar sesión</a>
                     <a class="btn btn-warning" href="{% url 'registrarse' %}">Registrarse</a>
                 {% endif %}     
@@ -144,9 +151,6 @@
     <div class="banner-area banner-inner-1 bg-black" id="banner">
         <!-- banner area start -->
         <div class="banner-inner pt-1">
-            {% if user.is_authenticated %}
-            <p style="padding-top: 10px; padding-right: 15px; text-transform: uppercase;font-weight: bold;text-align: right; font-size: large; color:rgb(255, 255, 255)"> {{user.first_name}} {{user.last_name}}</p>
-            {% endif %}    
         </div>
 
                                 
@@ -166,6 +170,15 @@
             <div class="row">
 
             {% block contenido %}
+            <div class="noticias-container">
+                {% for noticia in noticias %}
+                    <div class="noticia">
+                        <h3>{{ noticia.titulo }}</h3>
+                        <p>{{ noticia.subtitulo }}</p>
+                        <a href="{% url 'detalle_noticia' noticia.id %}" class="btn btn-primary">Leer más</a>
+                    </div>
+                {% endfor %}
+            </div>
                 
             {% endblock contenido %}
 

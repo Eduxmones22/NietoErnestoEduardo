@@ -28,16 +28,10 @@ class Noticia(models.Model):
     titulo = models.CharField(max_length=200)
     subtitulo = models.CharField(max_length=300)
     contenido = RichTextField()
-    imagen = models.ImageField(upload_to='img_blog/', blank=True, null=True)
+    imagen = models.ImageField(upload_to='media/', blank=True, null=True)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     consola = models.ForeignKey(Consola, on_delete=models.SET_NULL, null=True, blank=True)
     fecha = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return self.titulo
-   
-    
-    
 
     def __str__(self):
         return self.titulo

@@ -30,9 +30,9 @@ urlpatterns = [
     
     path('', include('blog.urls')),  # Sigue funcionando para /
     path('index/', include('blog.urls')),  # Ahora también para /index/
-    path('cuentas/', include('cuentas.urls')),  # Enlaza las rutas de cuentas    
+    path('cuentas/', include('cuentas.urls')),  # Enlaza las rutas de cuentas  
+      
 ]
-
 
 # Solo en desarrollo: permite servir archivos en la carpeta media
 if settings.DEBUG:
